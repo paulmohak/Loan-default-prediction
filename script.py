@@ -102,4 +102,17 @@ print("Chosen threshold for deployment:", best_threshold)
 y_pred_adjusted = (y_prob > best_threshold).astype(int)
 print("Evaluation report at chosen threshold:")
 print(classification_report(y_test, y_pred_adjusted))
+# 11. Feature Importance
+importances = rf.feature_importances_
+features = X.columns
+
+# Sort features by importance
+indices = np.argsort(importances)[::-1]
+
+plt.figure(figsize=(10,6))
+plt.title("Random Forest Feature Importance")
+plt.bar(range(len(features)), importances[indices], color="skyblue")
+plt.xticks(range(len(features)), [features[i] for i in indices], rotation=90)
+plt.tight_layout()
+plt.show()
 
